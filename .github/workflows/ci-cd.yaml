@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Java App to GKE
+name: Build and Deploy to GKE
 
 on:
   push:
@@ -59,7 +59,6 @@ jobs:
       run: |
         docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-    # Install gke-gcloud-auth-plugin
     - name: Install gke-gcloud-auth-plugin
       run: gcloud components install gke-gcloud-auth-plugin --quiet
 
@@ -69,4 +68,6 @@ jobs:
 
     - name: Deploy to GKE
       run: |
-        kubectl set image deployment/java-gke-app app=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        kubectl apply -f manifest/deployment.yaml
+        kubectl apply -f manifest/service.yaml
+        kubectl apply -f manifest/ingress.yaml
