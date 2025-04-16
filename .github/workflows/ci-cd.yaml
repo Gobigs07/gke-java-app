@@ -11,7 +11,7 @@ env:
   REPO_NAME: obiwan
   IMAGE_NAME: java-app
   CLUSTER_NAME: autopilot-cluster-1
-  CLUSTER_ZONE: us-east1-b         # Replace with your actual zone
+  CLUSTER_ZONE: us-east1
 
 jobs:
   build-deploy:
