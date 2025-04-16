@@ -3,11 +3,10 @@ kind: Ingress
 metadata:
   name: java-app-ingress
   annotations:
-    kubernetes.io/ingress.class: "gce"  # for GKE
+    kubernetes.io/ingress.class: "gce"  # for GKE Ingress controller
 spec:
   rules:
-  - host: java-gke.YOUR_DOMAIN.com     # optional, or remove for IP-based access
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
